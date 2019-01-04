@@ -1,4 +1,4 @@
-﻿# W23:[守护平台](https://github.com/OS-Q/W23)
+﻿# W23：[实时网关](https://github.com/OS-Q/W23)
 
 [![sites](OS-Q/OS-Q.png)](http://www.OS-Q.com)
 
@@ -8,7 +8,7 @@
 
 ## [平台描述](https://github.com/OS-Q/W23/wiki) 
 
-通过有线连接方式接入网络
+实时网关
 
 ### [资源](OS-Q/)
 
@@ -20,21 +20,21 @@
 
 ## [包含设备](https://github.com/OS-Q/W23/wiki) 
 
-#### D155：[板级设备](https://github.com/OS-Q/D155)
+#### D155：[Sub1G网关](https://github.com/OS-Q/D155)
 
+自定义协议Sub1GHz通信网关
 
+#### D156：[LoRa网关](https://github.com/OS-Q/D156)
 
-#### D156：[板级设备](https://github.com/OS-Q/D156)
+LoRa通信网关
 
+#### D157：[BLE网关](https://github.com/OS-Q/D157)
 
+BLE低功耗通信网关
 
-#### D157：[板级设备](https://github.com/OS-Q/D157)
+#### D158：[WiFi网关](https://github.com/OS-Q/D158)
 
-
-
-#### D158：[板级设备](https://github.com/OS-Q/D158)
-
-
+WiFi物联通信网关
 
 #### D159：[板级设备](https://github.com/OS-Q/D159)
 
@@ -49,21 +49,21 @@
 
 ## [同级平台](https://github.com/OS-Q/M6/wiki)
 
-#### -> W23：[守护平台](https://github.com/OS-Q/W23)
+#### -> W23：[实时网关](https://github.com/OS-Q/W23)
 
-用于守候低频数据，维护相关通信管道
+用于守候低频数据上报，维护低频设备通信管道
 
-#### W24：[缓冲平台](https://github.com/OS-Q/W24)
+#### W24：[扩展网关](https://github.com/OS-Q/W24)
 
-用于缓冲大数据流，维护相关通信正常
+具有可临时定义的网关，可以根据需要切换身份
 
-#### W25：[网侧平台](https://github.com/OS-Q/W25)
+#### W25：[安全网关](https://github.com/OS-Q/W25)
 
-用于对接网络服务，维护数据安全有效
+用于实现对数据的加密，保证数据向上的私密性
 
-#### W26：[储备平台](https://github.com/OS-Q/W26)
+#### W26：[分发网关](https://github.com/OS-Q/W26)
 
-用于完成资源储备，保证数据及时送达
+用于完成数据资源储备，保证通用数据及时下发
 
 ---
 
