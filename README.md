@@ -28,5 +28,10 @@ Edge-Q -> 体系 Q[1,4] -> 节点 M[1,12] -> 平台 W[1,52] -> 设备 D[1,365]
 	* W25：[入网网关](https://github.com/OS-Q/W25)
 	* W26：[服务网关](https://github.com/OS-Q/W26)
 
+### [项目关联](https://github.com/OS-Q/W23) 
+
+* W15：[短距管道](https://github.com/OS-Q/W15)
+* W20：[无线通信](https://github.com/OS-Q/W20)
+
 ### [OS-Q : Operation System for edge devices](http://www.OS-Q.com/Edge/W23)
 ####  2019-5-9
