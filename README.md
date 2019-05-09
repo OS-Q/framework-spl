@@ -16,7 +16,7 @@ Edge-Q -> 体系 Q[1,4] -> 节点 M[1,12] -> 平台 W[1,52] -> 设备 D[1,365]
 ### [平台结构](https://github.com/OS-Q/W23) 
 
 * M6：[通信网关](https://github.com/OS-Q/M6)
-	* W23：[接收网关](https://github.com/OS-Q/W23)
+	* W23：接收网关
 		* D155：[Sub1G平台](https://github.com/OS-Q/D155)
 		* D156：[Sub1G中继](https://github.com/OS-Q/D156)
 		* D157：[Sub1G转换](https://github.com/OS-Q/D157)
