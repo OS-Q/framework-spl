@@ -1,37 +1,18 @@
-﻿# [接收网关](https://github.com/OS-Q/W23) 
-[![sites](OS-Q/OS-Q.png)](http://www.OS-Q.com)
-####  qitas@qitas.cn
-#### 归属通信网关：[M6](https://github.com/OS-Q/M6)
-#### 关于系统架构：[OS-Q](https://github.com/OS-Q/OS-Q)
-Edge-Q -> 体系 Q[1,4] -> 节点 M[1,12] -> 平台 W[1,52] -> 设备 D[1,365]
-### [平台描述](https://github.com/OS-Q/W23/wiki) 
+﻿# [Framework N6](https://github.com/OS-Q/N6)
 
-接收网关
+[![sites](http://182.61.61.133/link/resources/OSQ.png)](http://www.OS-Q.com)
 
-### [平台资源](https://github.com/OS-Q/W23) 
+#### 关于系统架构：[OS-Q](https://github.com/OS-Q)
+#### 归属边缘体系：[EDGE-Q](https://github.com/EDGE-Q)
 
-- [资源](src/)
-- [文档](docs/)
+[EDGE-Q](https://github.com/OS-Q/EDGE-Q) -> Q[4] -> M[12] -> W[52] -> D[365] -> H[24] -> N[60] -> S[60]
 
-### [平台结构](https://github.com/OS-Q/W23) 
+### [Framework描述](https://github.com/OS-Q/N6/wiki) 
 
-* M6：[通信网关](https://github.com/OS-Q/M6)
-	* W23：接收网关
-		* D155：[Sub1G平台](https://github.com/OS-Q/D155)
-		* D156：[Sub1G中继](https://github.com/OS-Q/D156)
-		* D157：[Sub1G转换](https://github.com/OS-Q/D157)
-		* D158：[LoRa转换](https://github.com/OS-Q/D158)
-		* D159：[BLE平台](https://github.com/OS-Q/D159)
-		* D160：[BLE中继](https://github.com/OS-Q/D160)
-		* D161：[BLE转换](https://github.com/OS-Q/D161)
-	* W24：[集成网关](https://github.com/OS-Q/W24)
-	* W25：[入网网关](https://github.com/OS-Q/W25)
-	* W26：[服务网关](https://github.com/OS-Q/W26)
+[Framework N6](https://github.com/OS-Q/N6)  附属于[ Platform  H1](https://github.com/OS-Q/H1) ，用于[STM32](https://github.com/sochub/STM32)标准库开发。
 
-### [项目关联](https://github.com/OS-Q/W23) 
+说明：本库针对自动化导入编程进行项目优化，会牺牲部分可阅读性，学习使用STM32标准库，请查看查阅官方资料。
 
-* W15：[短距管道](https://github.com/OS-Q/W15)
-* W20：[无线通信](https://github.com/OS-Q/W20)
 
-### [OS-Q : Operation System for edge devices](http://www.OS-Q.com/Edge/W23)
-####  2019-5-9
+### [OS-Q = Open Solutions | Open Source |  Operating System ](http://www.OS-Q.com/N6)
+####  2019-11-12
