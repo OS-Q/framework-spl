@@ -1,7 +1,7 @@
 {
-    "name": "framework-N34",
+    "name": "N21",
     "description": "STM32 Standard Peripheral Library",
     "system": "*",
-    "url": "https://github.com/OS-Q/N34",
+    "url": "http://www.st.com/web/catalog/tools/FM147/CL1794/SC961/SS1743/PF257890",
     "version": "2.1.0"
 }
