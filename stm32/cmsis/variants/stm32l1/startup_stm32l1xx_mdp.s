@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file      startup_stm32l1xx_md.s
+  * @file      startup_stm32l1xx_mdp.s
   * @author    MCD Application Team
   * @version   V1.3.3
   * @date      20-April-2015
-  * @brief     STM32L1xx Ultra Low Power Medium-density Devices vector table for 
-  *            RIDE7 toolchain.
+  * @brief     STM32L1xx Ultra Low Power Medium-density Plus Devices vector table
+  *            for RIDE7 toolchain.
   *            This module performs:
   *                - Set the initial SP
   *                - Set the initial PC == Reset_Handler,
@@ -190,12 +190,24 @@ g_pfnVectors:
   .word TIM6_IRQHandler
   .word TIM7_IRQHandler
   .word 0
+  .word TIM5_IRQHandler
+  .word SPI3_IRQHandler
+  .word 0
+  .word 0
+  .word DMA2_Channel1_IRQHandler
+  .word DMA2_Channel2_IRQHandler
+  .word DMA2_Channel3_IRQHandler
+  .word DMA2_Channel4_IRQHandler
+  .word DMA2_Channel5_IRQHandler
+  .word AES_IRQHandler
+  .word COMP_ACQ_IRQHandler  
+  .word 0
   .word 0
   .word 0
   .word 0
   .word 0
   .word BootRAM          /* @0x108. This is for boot in RAM mode for 
-                            STM32L15x ULtra Low Power Medium-density devices. */
+                            STM32L15x ULtra Low Power Medium-density Plus devices. */
    
 /*******************************************************************************
 *
@@ -367,5 +379,32 @@ g_pfnVectors:
   .weak TIM7_IRQHandler
   .thumb_set TIM7_IRQHandler,Default_Handler
 
+  .weak TIM5_IRQHandler
+  .thumb_set TIM5_IRQHandler,Default_Handler
+  
+  .weak SPI3_IRQHandler
+  .thumb_set SPI3_IRQHandler,Default_Handler
+
+  .weak DMA2_Channel1_IRQHandler
+  .thumb_set DMA2_Channel1_IRQHandler,Default_Handler
+
+  .weak DMA2_Channel2_IRQHandler
+  .thumb_set DMA2_Channel2_IRQHandler,Default_Handler
+
+  .weak DMA2_Channel3_IRQHandler
+  .thumb_set DMA2_Channel3_IRQHandler,Default_Handler
+
+  .weak DMA2_Channel4_IRQHandler
+  .thumb_set DMA2_Channel4_IRQHandler,Default_Handler
+
+  .weak DMA2_Channel5_IRQHandler
+  .thumb_set DMA2_Channel5_IRQHandler,Default_Handler
+
+  .weak AES_IRQHandler
+  .thumb_set AES_IRQHandler,Default_Handler
+
+  .weak COMP_ACQ_IRQHandler
+   .thumb_set COMP_ACQ_IRQHandler,Default_Handler
+  
 /************************* (C) COPYRIGHT STMicroelectronics *****END OF FILE***/
 
