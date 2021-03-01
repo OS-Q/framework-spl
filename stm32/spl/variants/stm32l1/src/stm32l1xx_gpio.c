@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32l1xx_gpio.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    31-January-2014
+  * @version V1.3.1
+  * @date    20-April-2015
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the GPIO peripheral:           
   *           + Initialization and Configuration
@@ -55,7 +55,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.

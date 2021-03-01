@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32l1xx_rcc.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    31-January-2014
+  * @version V1.3.1
+  * @date    20-April-2015
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the Reset and clock control (RCC) peripheral:           
   *           + Internal/external clocks, PLL, CSS and MCO configuration
@@ -38,7 +38,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -431,6 +431,8 @@ void RCC_HSICmd(FunctionalState NewState)
   *           domain after reset, you have to enable write access using 
   *           PWR_RTCAccessCmd(ENABLE) function before to configure the LSE
   *           (to be done once after reset).  
+  * @note     Care must be taken when using this function to configure LSE mode 
+  *           as it clears systematically the LSEON bit before any new configuration.
   * @note     After enabling the LSE (RCC_LSE_ON or RCC_LSE_Bypass), the application
   *           software should wait on LSERDY flag to be set indicating that LSE clock
   *           is stable and can be used to clock the RTC.

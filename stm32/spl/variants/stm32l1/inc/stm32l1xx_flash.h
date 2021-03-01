@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32l1xx_flash.h
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    31-January-2014
+  * @version V1.3.1
+  * @date    20-April-2015
   * @brief   This file contains all the functions prototypes for the FLASH 
   *          firmware library.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -208,7 +208,51 @@ typedef enum
 
 #define OB_WRP2_AllPages               ((uint32_t)0xFFFFFFFF) /*!< Write protection of all Sectors */
 
+#define OB_WRP3_Pages1536to1551        ((uint32_t)0x00000001) /* Write protection of Sector96 */
+#define OB_WRP3_Pages1552to1567        ((uint32_t)0x00000002) /* Write protection of Sector97 */
+#define OB_WRP3_Pages1568to1583        ((uint32_t)0x00000004) /* Write protection of Sector98 */
+#define OB_WRP3_Pages1584to1599        ((uint32_t)0x00000008) /* Write protection of Sector99 */
+#define OB_WRP3_Pages1600to1615        ((uint32_t)0x00000010) /* Write protection of Sector100 */
+#define OB_WRP3_Pages1616to1631        ((uint32_t)0x00000020) /* Write protection of Sector101 */
+#define OB_WRP3_Pages1632to1647        ((uint32_t)0x00000040) /* Write protection of Sector102 */
+#define OB_WRP3_Pages1648to1663        ((uint32_t)0x00000080) /* Write protection of Sector103 */
+#define OB_WRP3_Pages1664to1679        ((uint32_t)0x00000100) /* Write protection of Sector104 */
+#define OB_WRP3_Pages1680to1695        ((uint32_t)0x00000200) /* Write protection of Sector105 */
+#define OB_WRP3_Pages1696to1711        ((uint32_t)0x00000400) /* Write protection of Sector106 */
+#define OB_WRP3_Pages1712to1727        ((uint32_t)0x00000800) /* Write protection of Sector107 */
+#define OB_WRP3_Pages1728to1743        ((uint32_t)0x00001000) /* Write protection of Sector108 */
+#define OB_WRP3_Pages1744to1759        ((uint32_t)0x00002000) /* Write protection of Sector109 */
+#define OB_WRP3_Pages1760to1775        ((uint32_t)0x00004000) /* Write protection of Sector110 */
+#define OB_WRP3_Pages1776to1791        ((uint32_t)0x00008000) /* Write protection of Sector111 */
+#define OB_WRP3_Pages1792to1807        ((uint32_t)0x00010000) /* Write protection of Sector112 */
+#define OB_WRP3_Pages1808to1823        ((uint32_t)0x00020000) /* Write protection of Sector113 */
+#define OB_WRP3_Pages1824to1839        ((uint32_t)0x00040000) /* Write protection of Sector114 */
+#define OB_WRP3_Pages1840to1855        ((uint32_t)0x00080000) /* Write protection of Sector115 */
+#define OB_WRP3_Pages1856to1871        ((uint32_t)0x00100000) /* Write protection of Sector116 */
+#define OB_WRP3_Pages1872to1887        ((uint32_t)0x00200000) /* Write protection of Sector117 */
+#define OB_WRP3_Pages1888to1903        ((uint32_t)0x00400000) /* Write protection of Sector118 */
+#define OB_WRP3_Pages1904to1919        ((uint32_t)0x00800000) /* Write protection of Sector119 */
+#define OB_WRP3_Pages1920to1935        ((uint32_t)0x01000000) /* Write protection of Sector120 */
+#define OB_WRP3_Pages1936to1951        ((uint32_t)0x02000000) /* Write protection of Sector121 */
+#define OB_WRP3_Pages1952to1967        ((uint32_t)0x04000000) /* Write protection of Sector122 */
+#define OB_WRP3_Pages1968to1983        ((uint32_t)0x08000000) /* Write protection of Sector123 */
+#define OB_WRP3_Pages1984to1999        ((uint32_t)0x10000000) /* Write protection of Sector124 */
+#define OB_WRP3_Pages2000to2015        ((uint32_t)0x20000000) /* Write protection of Sector125 */
+#define OB_WRP3_Pages2016to2031        ((uint32_t)0x40000000) /* Write protection of Sector126 */
+#define OB_WRP3_Pages2032to2047        ((uint32_t)0x80000000) /* Write protection of Sector127 */
+
+#define OB_WRP3_AllPages                      ((uint32_t)0xFFFFFFFF) /*!< Write protection of all Sectors */
+
 #define IS_OB_WRP(PAGE) (((PAGE) != 0x0000000))
+
+/* IMPORTANT NOTE
+   ============== 
+    In the StdLib, the naming of WRP registers is shifted vs. the Reference Manual:
+      - WRPR correspond to WRPR1
+      - WRPR1 correspond to WRPR2
+      - WRPR2 correspond to WRPR3
+      - WRPR3 correspond to WRPR4
+  */
 
 /**
   * @}
@@ -431,6 +475,7 @@ void FLASH_OB_Launch(void);
 FLASH_Status FLASH_OB_WRPConfig(uint32_t OB_WRP, FunctionalState NewState);
 FLASH_Status FLASH_OB_WRP1Config(uint32_t OB_WRP1, FunctionalState NewState);
 FLASH_Status FLASH_OB_WRP2Config(uint32_t OB_WRP2, FunctionalState NewState);
+FLASH_Status FLASH_OB_WRP3Config(uint32_t OB_WRP3, FunctionalState NewState);
 FLASH_Status FLASH_OB_RDPConfig(uint8_t OB_RDP);
 FLASH_Status FLASH_OB_PCROPConfig(uint32_t OB_WRP, FunctionalState NewState);
 FLASH_Status FLASH_OB_PCROP1Config(uint32_t OB_WRP1, FunctionalState NewState);
@@ -442,6 +487,7 @@ uint8_t FLASH_OB_GetUser(void);
 uint32_t FLASH_OB_GetWRP(void);
 uint32_t FLASH_OB_GetWRP1(void);
 uint32_t FLASH_OB_GetWRP2(void);
+uint32_t FLASH_OB_GetWRP3(void);
 FlagStatus FLASH_OB_GetRDP(void);
 FlagStatus FLASH_OB_GetSPRMOD(void);
 uint8_t FLASH_OB_GetBOR(void);

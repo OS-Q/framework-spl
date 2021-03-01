@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32l1xx_flash.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    31-January-2014
+  * @version V1.3.1
+  * @date    20-April-2015
   * @brief   This file provides all the Flash firmware functions. These functions 
   *          can be executed from Internal FLASH or Internal SRAM memories. 
   *          The functions that should be called from SRAM are defined inside 
@@ -75,7 +75,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -114,6 +114,9 @@
 #define WRP67_MASK                 ((uint32_t)0xFFFF0000)
 #define WRP89_MASK                 ((uint32_t)0x0000FFFF)
 #define WRP1011_MASK               ((uint32_t)0xFFFF0000)
+#define WRP1213_MASK               ((uint32_t)0x0000FFFF)
+#define WRP1415_MASK               ((uint32_t)0xFFFF0000)
+
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -1034,6 +1037,8 @@ void FLASH_OB_Launch(void)
   *   This parameter can be:
   *     @arg  value between OB_WRP_Pages0to15 and OB_WRP_Pages496to511
   *     @arg  OB_WRP_AllPages
+  * @note   In the StdLib, the naming of WRP registers is shifted vs. the Reference Manual:
+  *          - WRPR correspond to WRPR1  
   * @param  NewState: new state of the specified FLASH Pages Wtite protection.
   *   This parameter can be: ENABLE or DISABLE.
   * @retval FLASH Status: The returned value can be: 
@@ -1092,7 +1097,9 @@ FLASH_Status FLASH_OB_WRPConfig(uint32_t OB_WRP, FunctionalState NewState)
   * @param  OB_WRP1: specifies the address of the pages to be write protected.
   *   This parameter can be:
   *     @arg  value between OB_WRP_Pages512to527 and OB_WRP_Pages1008to1023
-  *     @arg OB_WRP_AllPages
+  *     @arg OB_WRP1_AllPages
+  * @note   In the StdLib, the naming of WRP registers is shifted vs. the Reference Manual:
+  *          - WRPR1 correspond to WRPR2
   * @param  NewState: new state of the specified FLASH Pages Wtite protection.
   *         This parameter can be: ENABLE or DISABLE.
   * @retval FLASH Status: The returned value can be: 
@@ -1150,7 +1157,9 @@ FLASH_Status FLASH_OB_WRP1Config(uint32_t OB_WRP1, FunctionalState NewState)
   * @param  OB_WRP2: specifies the address of the pages to be write protected.
   *   This parameter can be:
   *     @arg  value between OB_WRP_Pages1024to1039 and OB_WRP_Pages1520to1535
-  *     @arg OB_WRP_AllPages
+  *     @arg OB_WRP2_AllPages
+  * @note   In the StdLib, the naming of WRP registers is shifted vs. the Reference Manual:
+  *          - WRPR2 correspond to WRPR3
   * @param  NewState: new state of the specified FLASH Pages Wtite protection.
   *         This parameter can be: ENABLE or DISABLE.
   * @retval FLASH Status: The returned value can be: 
@@ -1203,6 +1212,66 @@ FLASH_Status FLASH_OB_WRP2Config(uint32_t OB_WRP2, FunctionalState NewState)
 }
 
 /**
+  * @brief  Write protects the desired pages of the fourth 128KB of the Flash.
+  * @note   This function can be used only for STM32L1XX_XL devices.
+  * @param  OB_WRP3: specifies the address of the pages to be write protected.
+  *   This parameter can be:
+  *     @arg  value between OB_WRP3_Pages1536to1551 and OB_WRP3_Pages2032to2047
+  *     @arg OB_WRP3_AllPages
+  * @note   In the StdLib, the naming of WRP registers is shifted vs. the Reference Manual:
+  *          - WRPR3 correspond to WRPR4
+  * @param  NewState: new state of the specified FLASH Pages Wtite protection.
+  *         This parameter can be: ENABLE or DISABLE.
+  * @retval FLASH Status: The returned value can be: 
+  *         FLASH_ERROR_PROGRAM, FLASH_ERROR_WRP, FLASH_COMPLETE or FLASH_TIMEOUT.
+  */
+FLASH_Status FLASH_OB_WRP3Config(uint32_t OB_WRP3, FunctionalState NewState)
+{
+  uint32_t WRP1213_Data = 0, WRP1415_Data = 0;
+  
+  FLASH_Status status = FLASH_COMPLETE;
+  uint32_t tmp1 = 0, tmp2 = 0;
+  
+  /* Check the parameters */
+  assert_param(IS_OB_WRP(OB_WRP3));
+  assert_param(IS_FUNCTIONAL_STATE(NewState));
+     
+  /* Wait for last operation to be completed */
+  status = FLASH_WaitForLastOperation(FLASH_ER_PRG_TIMEOUT);
+ 
+  if(status == FLASH_COMPLETE)
+  {
+    if (NewState != DISABLE)
+    {
+      WRP1213_Data = (uint16_t)(((OB_WRP3 & WRP1213_MASK) | OB->WRP1213));
+      WRP1415_Data = (uint16_t)((((OB_WRP3 & WRP1415_MASK)>>16 | OB->WRP1415))); 
+      tmp1 = (uint32_t)(~(WRP1213_Data) << 16)|(WRP1213_Data);
+      OB->WRP1213 = tmp1;
+      
+      tmp2 = (uint32_t)(~(WRP1415_Data) << 16)|(WRP1415_Data);
+      OB->WRP1415 = tmp2;      
+    }             
+    
+    else
+    {
+      WRP1213_Data = (uint16_t)(~OB_WRP3 & (WRP1213_MASK & OB->WRP1213));
+      WRP1415_Data = (uint16_t)((((~OB_WRP3 & WRP1415_MASK)>>16 & OB->WRP1415))); 
+
+      tmp1 = (uint32_t)((~WRP1213_Data) << 16)|(WRP1213_Data);
+      OB->WRP1213 = tmp1;
+      
+      tmp2 = (uint32_t)((~WRP1415_Data) << 16)|(WRP1415_Data);
+      OB->WRP1415 = tmp2;
+    }
+    /* Wait for last operation to be completed */
+    status = FLASH_WaitForLastOperation(FLASH_ER_PRG_TIMEOUT);
+  }
+
+  /* Return the write protection operation Status */
+  return status;      
+}
+
+/**
   * @brief  Enables or disables the read out protection.
   * @note   To correctly run this function, the FLASH_OB_Unlock() function
   *         must be called before.
@@ -1220,7 +1289,7 @@ FLASH_Status FLASH_OB_WRP2Config(uint32_t OB_WRP2, FunctionalState NewState)
 FLASH_Status FLASH_OB_RDPConfig(uint8_t OB_RDP)
 {
   FLASH_Status status = FLASH_COMPLETE;
-  uint8_t tmp1 = 0;
+  uint16_t tmp1 = 0;
   uint32_t tmp2 = 0;
   
   /* Check the parameters */
@@ -1228,8 +1297,8 @@ FLASH_Status FLASH_OB_RDPConfig(uint8_t OB_RDP)
   status = FLASH_WaitForLastOperation(FLASH_ER_PRG_TIMEOUT);
   
   /* calculate the option byte to write */
-  tmp1 = (uint8_t)(~(OB_RDP ));
-  tmp2 = (uint32_t)(((uint32_t)((uint32_t)(tmp1) << 16)) | ((uint32_t)OB_RDP));
+  tmp1 =  ((uint16_t)(*(__IO uint16_t *)(OB_BASE)) & 0xFF00) | OB_RDP; 
+  tmp2 = (uint32_t)(((uint32_t)((uint32_t)(~tmp1) << 16)) | ((uint32_t)tmp1));
   
   if(status == FLASH_COMPLETE)
   {         
@@ -1569,6 +1638,8 @@ uint8_t FLASH_OB_GetUser(void)
 
 /**
   * @brief  Returns the FLASH Write Protection Option Bytes value.
+  * @note   In the StdLib, the naming of WRP registers is shifted vs. the Reference Manual:
+  *          - WRPR correspond to WRPR1  
   * @param  None
   * @retval The FLASH Write Protection Option Bytes value.
   */
@@ -1582,6 +1653,8 @@ uint32_t FLASH_OB_GetWRP(void)
   * @brief  Returns the FLASH Write Protection Option Bytes value.
   * @note   This function can be used only for STM32L1XX_HD, STM32L1XX_MDP and  
   *         STM32L1XX_XL devices.
+  * @note   In the StdLib, the naming of WRP registers is shifted vs. the Reference Manual:
+  *          - WRPR1 correspond to WRPR2
   * @param  None
   * @retval The FLASH Write Protection Option Bytes value.
   */
@@ -1594,6 +1667,8 @@ uint32_t FLASH_OB_GetWRP1(void)
 /**
   * @brief  Returns the FLASH Write Protection Option Bytes value.
   * @note   This function can be used only for STM32L1XX_HD and STM32L1XX_XL devices.
+  * @note   In the StdLib, the naming of WRP registers is shifted vs. the Reference Manual:
+  *          - WRPR2 correspond to WRPR3
   * @param  None
   * @retval The FLASH Write Protection Option Bytes value.
   */
@@ -1601,6 +1676,20 @@ uint32_t FLASH_OB_GetWRP2(void)
 {
   /* Return the FLASH write protection Register value */
   return (uint32_t)(FLASH->WRPR2);
+}
+
+/**
+  * @brief  Returns the FLASH Write Protection Option Bytes value.
+  * @note   This function can be used only for STM32L1XX_XL devices.
+  * @note   In the StdLib, the naming of WRP registers is shifted vs. the Reference Manual:
+  *          - WRPR3 correspond to WRPR4
+  * @param  None
+  * @retval The FLASH Write Protection Option Bytes value.
+  */
+uint32_t FLASH_OB_GetWRP3(void)
+{
+  /* Return the FLASH write protection Register value */
+  return (uint32_t)(FLASH->WRPR3);
 }
 
 /**

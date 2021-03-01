@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32l1xx_pwr.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    31-January-2014
+  * @version V1.3.1
+  * @date    20-April-2015
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the Power Controller (PWR) peripheral:           
   *           + RTC Domain Access
@@ -17,7 +17,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -650,7 +650,9 @@ void PWR_EnterSleepMode(uint32_t PWR_Regulator, uint8_t PWR_SLEEPEntry)
   else
   {
     /* Request Wait For Event */
+    __SEV();
     __WFE();
+    __WFE();    
   }
 }
 
@@ -713,17 +715,17 @@ void PWR_EnterSTOPMode(uint32_t PWR_Regulator, uint8_t PWR_STOPEntry)
 /**
   * @brief  Enters STANDBY mode.
   * @note   In Standby mode, all I/O pins are high impedance except for:
-  *         Reset pad (still available) 
-  *         RTC_AF1 pin (PC13) if configured for Wakeup pin 2 (WKUP2), tamper, 
-  *         time-stamp, RTC Alarm out, or RTC clock calibration out.
-  *         WKUP pin 1 (PA0) and WKUP pin 3 (PE6), if enabled.       
+  *           - Reset pad (still available) 
+  *           - RTC_AF1 pin (PC13) if configured for Wakeup pin 2 (WKUP2), tamper, 
+  *             time-stamp, RTC Alarm out, or RTC clock calibration out.
+  *           - WKUP pin 1 (PA0) and WKUP pin 3 (PE6), if enabled.
+  * @note   Wakeup flag (WUF) need to be cleared at application level before to
+  *         call this function.                  
   * @param  None
   * @retval None
   */
 void PWR_EnterSTANDBYMode(void)
 {
-  /* Clear Wakeup flag */
-  PWR->CR |= PWR_CR_CWUF;
   
   /* Select STANDBY mode */
   PWR->CR |= PWR_CR_PDDS;
