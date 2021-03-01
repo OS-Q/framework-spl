@@ -18,6 +18,13 @@ void simple_delay(uint32_t us)
 	}
 }
 
+void RCC_Configuration(void)
+{
+    /* Enable GPIOA, GPIOB, RCC_APB2Periph_GPIO_KEY_BUTTON and AFIO clocks */
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB |
+                        RCC_APB2Periph_AFIO, ENABLE);
+}
+
 
 int main(void)
 {
@@ -27,13 +34,14 @@ int main(void)
     //Step 2: Change PB0's mode to 0x3 (output) and cfg to 0x0 (push-pull)
     // GPIOB->CRL = GPIO_CRL_MODE0_0 | GPIO_CRL_MODE0_1;
     // RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);
+    RCC_Configuration();
     ENABLE_GPIO_CLOCK;
     /* Configure PD0 and PD2 in output pushpull mode */
     GPIO_InitStructure.GPIO_Pin = LEDPIN;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_Init(LEDPORT, &GPIO_InitStructure);
-
+    GPIO_PinRemapConfig(GPIO_Remap_SWJ_Disable, ENABLE);
     while (1)
     {
 		GPIO_SetBits(LEDPORT, LEDPIN);
