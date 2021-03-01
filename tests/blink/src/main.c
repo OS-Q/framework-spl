@@ -4,12 +4,6 @@
 	#define LEDPORT (GPIOB)
 	#define LEDPIN (GPIO_Pin_7)
 	#define ENABLE_GPIO_CLOCK (RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE))
-#elif STM32F1
-	#include <stm32f10x_gpio.h>
-	#include <stm32f10x_rcc.h>
-	#define LEDPORT (GPIOC)
-	#define LEDPIN (GPIO_Pin_13)
-	#define ENABLE_GPIO_CLOCK (RCC_APB2Periph_GPIOC(RCC_APB2Periph_GPIOC, ENABLE))
 #elif STM32F3
 	#include <stm32f30x_gpio.h>
 	#include <stm32f30x_rcc.h>
@@ -42,6 +36,7 @@ int main(void)
 	RCC_DeInit();
 	/* enable clock GPIO */
 	ENABLE_GPIO_CLOCK;
+
 	/* use LED pin */
 	gpio.GPIO_Pin = LEDPIN;
 	/* mode: output */
