@@ -1,19 +1,19 @@
-name: N21
+name: windows
 
 on: [push, pull_request]
 
 jobs:
   build:
+    runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: [3.7]
-        tests:
+        examples:
+          - "tests/GPIO"
           - "tests/blink"
           - "tests/blinkf1"
 
-    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -22,11 +22,13 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: ${{ matrix.python-version }}
+
       - name: Install
         run: |
           python -m pip install --upgrade pip
           pip install -U https://github.com/OS-Q/S03/archive/master.zip
           platformio platform install https://github.com/OS-Q/P21.git
+
       - name: Build
         run: |
-          platformio run -d ${{ matrix.tests }}
+          platformio run -d ${{ matrix.examples }}
