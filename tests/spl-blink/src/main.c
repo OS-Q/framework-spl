@@ -36,7 +36,6 @@ int main(void)
 	RCC_DeInit();
 	/* enable clock GPIO */
 	ENABLE_GPIO_CLOCK;
-
 	/* use LED pin */
 	gpio.GPIO_Pin = LEDPIN;
 	/* mode: output */

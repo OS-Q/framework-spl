@@ -10,7 +10,7 @@ jobs:
       matrix:
         python-version: [3.7]
         examples:
-          - "tests/blink"
+          - "tests/spl-blink"
           - "tests/GPIO_F0"
           - "tests/GPIO_F1"
           - "tests/GPIO_F2"
