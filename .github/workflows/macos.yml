@@ -13,6 +13,7 @@ jobs:
           - "tests/blink"
           - "tests/GPIO_F1"
           - "tests/GPIO_F2"
+          - "tests/GPIO_F4"
           - "tests/GPIO_L1"
 
     steps:
