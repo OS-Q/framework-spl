@@ -29,7 +29,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f30x.h"
 #include "stm32f30x_gpio.h"
-
+#include <stm32f30x_rcc.h>
 /** @addtogroup STM32F30x_StdPeriph_Examples
   * @{
   */
