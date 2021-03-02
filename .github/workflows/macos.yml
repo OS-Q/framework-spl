@@ -11,6 +11,7 @@ jobs:
         python-version: [3.7]
         examples:
           - "tests/blink"
+          - "tests/GPIO_F0"
           - "tests/GPIO_F1"
           - "tests/GPIO_F2"
           - "tests/GPIO_F4"
