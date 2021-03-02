@@ -10,9 +10,10 @@ jobs:
       matrix:
         python-version: [3.7]
         examples:
-          - "tests/GPIO"
           - "tests/blink"
-          - "tests/blinkf1"
+          - "tests/GPIO_F1"
+          - "tests/GPIO_F2"
+          - "tests/GPIO_L1"
 
     steps:
       - uses: actions/checkout@v2
