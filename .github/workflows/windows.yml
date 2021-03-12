@@ -1,6 +1,16 @@
 name: windows
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+      - github_actions
+    tags:
+      - '*'
+  pull_request:
+    branches:
+      - master
+      - github_actions
 
 jobs:
   build:
@@ -31,7 +41,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -U https://github.com/OS-Q/S03/archive/master.zip
-          platformio platform install https://github.com/OS-Q/P21.git
+          qio platform install https://github.com/OS-Q/P21.git
 
       - name: Build
         run: |
