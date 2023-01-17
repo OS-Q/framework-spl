@@ -1,4 +1,4 @@
-﻿# [framework-spl](https://github.com/OS-Q/framework-spl)
+﻿# [Framework-SPL](https://github.com/OS-Q/framework-spl)
 
 [![Build Status](https://github.com/OS-Q/framework-spl/workflows/test/badge.svg)](https://github.com/OS-Q/framework-spl/actions/workflows/test.yml)
 
