@@ -1,5 +1,5 @@
 {
-    "name": "E21A",
+    "name": "framework-spl",
     "description": "STM32 Standard Peripheral Library",
     "system": "*",
     "url": "http://www.st.com/web/catalog/tools/FM147/CL1794/SC961/SS1743/PF257890",
