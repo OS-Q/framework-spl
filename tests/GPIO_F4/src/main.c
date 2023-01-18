@@ -60,8 +60,8 @@ int main(void)
        system_stm32f4xx.c file
      */
 
-  /* GPIOG Peripheral clock enable */
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOG, ENABLE);
+  /* GPIOA Peripheral clock enable */
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
 
   /* Configure PG6 and PG8 in output pushpull mode */
   GPIO_InitStructure.GPIO_Pin = LED1_PIN | LED2_PIN;
@@ -69,7 +69,7 @@ int main(void)
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-  GPIO_Init(GPIOG, &GPIO_InitStructure);
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
 
   /* To achieve GPIO toggling maximum frequency, the following  sequence is mandatory.
      You can monitor PG6 or PG8 on the scope to measure the output signal.
@@ -79,54 +79,54 @@ int main(void)
   while (1)
   {
     /* Set PG6 and PG8 */
-    GPIOG->BSRRL = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRL = LED1_PIN | LED2_PIN;
     /* Reset PG6 and PG8 */
-    GPIOG->BSRRH = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRH = LED1_PIN | LED2_PIN;
 
     /* Set PG6 and PG8 */
-    GPIOG->BSRRL = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRL = LED1_PIN | LED2_PIN;
     /* Reset PG6 and PG8 */
-    GPIOG->BSRRH = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRH = LED1_PIN | LED2_PIN;
 
     /* Set PG6 and PG8 */
-    GPIOG->BSRRL = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRL = LED1_PIN | LED2_PIN;
     /* Reset PG6 and PG8 */
-    GPIOG->BSRRH = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRH = LED1_PIN | LED2_PIN;
 
     /* Set PG6 and PG8 */
-    GPIOG->BSRRL = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRL = LED1_PIN | LED2_PIN;
     /* Reset PG6 and PG8 */
-    GPIOG->BSRRH = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRH = LED1_PIN | LED2_PIN;
 
     /* Set PG6 and PG8 */
-    GPIOG->BSRRL = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRL = LED1_PIN | LED2_PIN;
     /* Reset PG6 and PG8 */
-    GPIOG->BSRRH = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRH = LED1_PIN | LED2_PIN;
 
     /* Set PG6 and PG8 */
-    GPIOG->BSRRL = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRL = LED1_PIN | LED2_PIN;
     /* Reset PG6 and PG8 */
-    GPIOG->BSRRH = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRH = LED1_PIN | LED2_PIN;
 
     /* Set PG6 and PG8 */
-    GPIOG->BSRRL = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRL = LED1_PIN | LED2_PIN;
     /* Reset PG6 and PG8 */
-    GPIOG->BSRRH = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRH = LED1_PIN | LED2_PIN;
 
     /* Set PG6 and PG8 */
-    GPIOG->BSRRL = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRL = LED1_PIN | LED2_PIN;
     /* Reset PG6 and PG8 */
-    GPIOG->BSRRH = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRH = LED1_PIN | LED2_PIN;
 
     /* Set PG6 and PG8 */
-    GPIOG->BSRRL = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRL = LED1_PIN | LED2_PIN;
     /* Reset PG6 and PG8 */
-    GPIOG->BSRRH = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRH = LED1_PIN | LED2_PIN;
 
     /* Set PG6 and PG8 */
-    GPIOG->BSRRL = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRL = LED1_PIN | LED2_PIN;
     /* Reset PG6 and PG8 */
-    GPIOG->BSRRH = LED1_PIN | LED2_PIN;
+    GPIOA->BSRRH = LED1_PIN | LED2_PIN;
   }
 }
 
